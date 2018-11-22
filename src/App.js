@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
-import logo from './assets/images/logo.svg';
-import './assets/styles/App.css';
+import React, { Component } from "react";
+import logo from "./assets/images/logo.svg";
+import "./assets/styles/App.css";
+import LoginBox from "./components/LoginBox";
 
 class App extends Component {
   render() {
@@ -20,6 +21,7 @@ class App extends Component {
             Learn React
           </a>
         </header>
+        <LoginBox />
       </div>
     );
   }
