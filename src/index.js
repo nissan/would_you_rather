@@ -1,12 +1,18 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
-import thunk from "redux-thunk";
+import { compose, createStore } from "redux";
 import App from "./App";
 import "./assets/styles/index.css";
+import middleware from "./middleware";
+import reducers from "./reducers";
 import * as serviceWorker from "./serviceWorker";
-const store = createStore(applyMiddleware(thunk));
+
+//add composeEnhancers to give browser extension Redux Devtools access
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(reducers, composeEnhancers(middleware));
 
 ReactDOM.render(
   <Provider store={store}>

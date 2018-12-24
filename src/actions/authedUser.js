@@ -1,8 +1,15 @@
-export const SET_AUTHED_USER = "SET_AUTHED_USER";
+export const LOGIN_USER = "LOGIN_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
 
-export const setAuthedUser = (userId) => {
+export const loginUser = (userId) => {
   return {
-    type: SET_AUTHED_USER,
-    payload: userId,
+    type: LOGIN_USER,
+    userId
+  }
+}
+
+export const logoutUser = () => {
+  return {
+    type: LOGOUT_USER,
   }
 }
