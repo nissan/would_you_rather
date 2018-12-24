@@ -20,7 +20,6 @@ class LoginPage extends React.Component {
     const { onSubmitForm } = this.props;
     e.preventDefault();
     onSubmitForm(e.target.selectedUser.value);
-    console.log(e.target.selectedUser.value);
   }
   render() {
     const { users } = this.props;
@@ -60,7 +59,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
   onSubmitForm: userId => {
-    console.log("UserID: ", userId);
     dispatch(loginUser(userId));
   }
 });

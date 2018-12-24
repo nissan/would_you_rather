@@ -9,7 +9,6 @@ import Topbar from "./components/Topbar";
 import { routes } from "./utils/";
 import { handleLoadUsers } from "./actions/users";
 
-
 class App extends Component {
   componentDidMount() {
     const { onLoadUsers } = this.props;
@@ -24,13 +23,22 @@ class App extends Component {
           <Switch>
             {isAuthenticated && (
               <React.Fragment>
-                <Route path={routes.root} exact component={HomePage} />
+                <Route
+                  path={routes.root}
+                  exact
+                  component={HomePage}
+                  {...this.props}
+                />
                 <Route path={routes.addQuestion} component={AddQuestionPage} />
                 <Route path={routes.leaderboard} component={LeaderboardPage} />
               </React.Fragment>
             )}
-            <Route path={routes.leaderboard} component={LeaderboardPage} />
-            <Route component={LoginPage} />
+            <Route
+              path={routes.leaderboard}
+              component={LeaderboardPage}
+              {...this.props}
+            />
+            <Route component={LoginPage} {...this.props} />
           </Switch>
         </React.Fragment>
       </Router>
@@ -53,4 +61,7 @@ export const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
