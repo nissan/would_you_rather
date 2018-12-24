@@ -1,33 +1,28 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import { Col, Container, Row } from "reactstrap";
+import {routes} from '../utils';
+
+import TopbarButton from "./TopbarButton";
 const Topbar = props => {
   const { isAuthenticated } = props;
   return (
     <React.Fragment>
-      <Container fluid>
-        <Row>
-          <Col>
-            <Link to="/home">Home</Link>
-          </Col>
-          <Col>
-            {" "}
-            {isAuthenticated && <Link to="/newQuestion">New Question</Link>}
-          </Col>
-          <Col>
-            <Link to="/leaderboard">Leader board</Link>
-          </Col>
-          <Col>{isAuthenticated && <Link to="/logout">Logout</Link>}</Col>
-        </Row>
-      </Container>
+      <TopbarButton to={routes.root}>Home</TopbarButton>
+
+      {isAuthenticated && (
+        <TopbarButton to={routes.addQuestion}>New Question</TopbarButton>
+      )}
+
+      <TopbarButton to={routes.leaderboard}>Leaderboard</TopbarButton>
+
+      {isAuthenticated && <TopbarButton to={routes.logout}>Logout</TopbarButton>}
     </React.Fragment>
   );
 };
 
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.authedUser.userId !== 0 ? true : false
+    isAuthenticated: state.authedUserId !== "" ? true : false
   };
 };
 

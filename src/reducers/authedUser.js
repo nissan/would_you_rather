@@ -1,11 +1,11 @@
 import { LOGIN_USER, LOGOUT_USER } from "../actions/authedUser";
 
-export const authedUser = (state = { userId: 0 }, action) => {
+export const authedUser = (state = "", action) => {
   switch (action.type) {
     case LOGIN_USER:
       return action.userId;
     case LOGOUT_USER:
-      return {};
+      return "";
     default:
       return state;
   }
