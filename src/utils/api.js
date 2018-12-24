@@ -3,6 +3,7 @@ import * as DATA from '../_DATA';
 
 export const getUsers = async () => {
   const users = await DATA._getUsers();
+  console.log(users);
   return users;
 }
 
