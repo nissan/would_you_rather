@@ -1,28 +1,50 @@
 import React from "react";
-import { Card, CardTitle, CardBody, CardFooter, Button } from "reactstrap";
-import {Link} from 'react-router-dom';
-import Avatar from './Avatar';
-import {routes} from '../utils';
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardTitle,
+  CardBody,
+  CardFooter,
+  Button
+} from "reactstrap";
+import { Link } from "react-router-dom";
+import Avatar from "./Avatar";
+import { routes } from "../utils";
 export const QuestionSummaryCard = props => {
-  const {avatarUrl, name, questionId,  optionsSummaryText} = props;
+  const { avatarUrl, name, questionId, optionsSummaryText } = props;
   return (
     <React.Fragment>
-      <Card>
-        <CardTitle>
-          <Avatar
-            picture={avatarUrl}
-            name={name}
-          />{" "}
-          {name} asks: Would you rather
-        </CardTitle>
-        <CardBody>    
-          <div>{optionsSummaryText}</div>
-        </CardBody>
-        <CardFooter>
-          {" "}
-          <Button color="info"><Link to={`${routes.questions}${questionId}`} style={{color:"white"}}>View Poll</Link></Button>
-        </CardFooter>
-      </Card>
+      <Container fluid style={{border:"2px solid blue"}}>
+        <Row>
+          <Col md={{ size: 1 }} style={{marginTop:20, paddingTop:20 }} >
+            <Avatar big picture={avatarUrl} name={name}  />
+          </Col>
+          <Col md={{ size: 8 }} style={{marginTop:20, paddingTop:20 }} >
+            <Card style={{ padding: 4, margin: 4}}>
+              <CardTitle tag="h3">{name} asks: Would you rather</CardTitle>
+
+              <CardBody>
+                {optionsSummaryText} <br />
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="text-center">
+            {" "}
+            <Button color="info" style={{margin:10, padding:10}}>
+              <Link
+                to={`${routes.questions}${questionId}`}
+                style={{ color: "white" }}
+              >
+                View Poll
+              </Link>
+            </Button>
+          </Col>
+        </Row>
+      </Container>
     </React.Fragment>
   );
 };

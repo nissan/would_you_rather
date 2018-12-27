@@ -8,7 +8,8 @@ import {
   Button,
   Form,
   Input,
-  Label
+  Label,
+  Progress
 } from "reactstrap";
 import { connect } from "react-redux";
 import Avatar from "./Avatar";
@@ -97,7 +98,46 @@ export const ViewQuestionPage = props => {
           <Input type="hidden" id="questionId" value={question.id} />
         </CardBody>
         <CardFooter>
-          <Button>Submit</Button>
+          {(answer === "optionOne" || answer === "optionTwo") && (
+            <React.Fragment>
+              <Progress
+                striped
+                color="success"
+                value={
+                  (question.optionOne.votes.length /
+                    (question.optionOne.votes.length +
+                      question.optionTwo.votes.length)) *
+                  100
+                }
+              >
+                <span style={{ color: "black", padding: 4, margin: 4 }}>
+                  {question.optionOne.text}: {(question.optionOne.votes.length /
+                    (question.optionOne.votes.length +
+                      question.optionTwo.votes.length)) *
+                  100}%
+                </span>
+              </Progress>
+              <br />
+              <Progress
+                striped
+                color="success"
+                value={
+                  (question.optionTwo.votes.length /
+                    (question.optionOne.votes.length +
+                      question.optionTwo.votes.length)) *
+                  100
+                }
+              >
+                <span style={{ color: "black", padding: 4, margin: 4 }}>
+                  {question.optionTwo.text}: {(question.optionTwo.votes.length /
+                    (question.optionOne.votes.length +
+                      question.optionTwo.votes.length)) *
+                  100}%
+                </span>
+              </Progress>
+            </React.Fragment>
+          )}
+          {(answer === undefined || answer === "") && <Button>Submit</Button>}
         </CardFooter>
       </Card>
     </Form>
