@@ -6,7 +6,6 @@ import {
   Card,
   CardTitle,
   CardBody,
-  CardFooter,
   Button
 } from "reactstrap";
 import { Link } from "react-router-dom";
