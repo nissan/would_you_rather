@@ -6,13 +6,13 @@ export const UserCard = props => {
   const { user } = props;
   const score = user.questions.length + Object.keys(user.answers).length;
   return (
-    <Container fluid style={{ border: "1px solid black" }}>
-      <Row style={{ border: "1px solid black" }}>
-        <Col md={{ size: 1 }} style={{ borderRight: "1px solid black" }}>
+    <Container fluid style={{ border: "2px solid blue",marginTop:10, paddingTop:10 }}>
+      <Row>
+        <Col md={{ size: 1 }} style={{marginTop:20, paddingTop:20 }}>
           <Avatar big picture={user.avatarURL} name={user.name} />
         </Col>
-        <Col md={{ size: 8 }} style={{ border: "1px solid black" }}>
-          <Card style={{ padding: 4, margin: 4, border: "1px solid blue" }}>
+        <Col md={{ size: 8 }} style={{marginTop:10, paddingTop:10 }} >
+          <Card style={{ padding: 4, margin: 4}}>
             <CardTitle tag="h3">{user.name}</CardTitle>
 
             <CardBody>
@@ -23,8 +23,8 @@ export const UserCard = props => {
             </CardBody>
           </Card>
         </Col>
-        <Col style={{ border: "2px solid black" }}>
-          <Card style={{ padding: 4, margin: 4, border: "1px solid blue" }}>
+        <Col style={{marginTop:10, paddingTop:10 }} >
+          <Card style={{ padding: 4, margin: 4}}>
             <CardTitle>Score</CardTitle>
             <CardBody tag="h3">{score}</CardBody>
           </Card>

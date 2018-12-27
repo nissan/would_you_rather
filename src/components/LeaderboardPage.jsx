@@ -6,6 +6,7 @@ const LeaderboardPage = props => {
   const { users } = props;
   return (
     <React.Fragment>
+      <h1 className="text-center">Leaderboard</h1>
       {users.map(user => (
         <UserCard user={user} key={user.id} />
       ))}

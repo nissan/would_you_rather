@@ -1,13 +1,7 @@
 import React from "react";
 import AnsweredQuestions from "./AnsweredQuestions";
 import UnansweredQuestions from "./UnansweredQuestions";
-import {
-  Nav,
-  NavItem,
-  NavLink,
-  TabContent,
-  TabPane
-} from "reactstrap";
+import { Nav, NavItem, NavLink, TabContent, TabPane } from "reactstrap";
 import classnames from "classnames";
 
 export class HomePage extends React.Component {
@@ -28,6 +22,7 @@ export class HomePage extends React.Component {
   render() {
     return (
       <React.Fragment>
+        <h1 className="text-center">Home</h1>
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -36,7 +31,13 @@ export class HomePage extends React.Component {
                 this.toggle("1");
               }}
             >
-              Unanswered Questions
+              {this.state.activeTab === "1" ? (
+                <span style={{ color: "blue" }}>
+                  <strong>Unanswered Questions</strong>
+                </span>
+              ) : (
+                <span>Unanswered Questions</span>
+              )}
             </NavLink>
           </NavItem>
           <NavItem>
@@ -46,7 +47,13 @@ export class HomePage extends React.Component {
                 this.toggle("2");
               }}
             >
-              Answered Questions
+              {this.state.activeTab === "2" ? (
+                <span style={{ color: "blue" }}>
+                  <strong>Answered Questions</strong>
+                </span>
+              ) : (
+                <span>Answered Questions</span>
+              )}
             </NavLink>
           </NavItem>
         </Nav>
