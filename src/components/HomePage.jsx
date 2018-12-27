@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import Avatar from "./Avatar";
 import AnsweredQuestions from "./AnsweredQuestions";
 import UnansweredQuestions from "./UnansweredQuestions";
 import {
@@ -28,10 +26,8 @@ export class HomePage extends React.Component {
     }
   }
   render() {
-    const { user} = this.props;
     return (
       <React.Fragment>
-        Welcome {user.name} <Avatar picture={user.avatarURL} name={user.name} />{" "}
         <Nav tabs>
           <NavItem>
             <NavLink
@@ -66,11 +62,5 @@ export class HomePage extends React.Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    user: state.users.find(user=>user.id===state.authedUserId),
-    questions: state.questions
-  };
-};
 
-export default connect(mapStateToProps)(HomePage);
+export default HomePage;

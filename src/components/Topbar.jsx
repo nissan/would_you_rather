@@ -27,11 +27,22 @@ const Topbar = props => {
             <Col>
               {" "}
               <Avatar picture={user.avatarURL} name={user.name} />
+              Hello, {user.name}
             </Col>
             <Col>
-              <Button onClick={onLogoutUser}>Logout</Button>
+              <Button
+                onClick={onLogoutUser}
+                color="primary"
+                outline
+                style={{ margin: 4, padding: 4 }}
+              >
+                Logout
+              </Button>
             </Col>
           </React.Fragment>
+        )}
+        {!isAuthenticated && (
+          <TopbarButton to={routes.root}>Login</TopbarButton>
         )}
       </Row>
     </Container>
@@ -49,7 +60,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onLogoutUser: (e) => {
+  onLogoutUser: e => {
     e.preventDefault();
     console.log("Logout clicked");
     dispatch(logoutUser());

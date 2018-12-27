@@ -11,13 +11,17 @@ import {
   Label
 } from "reactstrap";
 import { connect } from "react-redux";
+import Avatar from "./Avatar";
 
 export const ViewQuestionPage = props => {
-  const { question, answer } = props;
+  const { question, answer, author } = props;
   return (
     <Form>
       <Card>
-        <CardTitle>Would you rather</CardTitle>
+        <CardTitle>
+          <Avatar picture={author.avatarURL} name={author.name} />
+          {author.name} asks: Would you rather
+        </CardTitle>
         <CardBody>
           {answer === "optionOne" && (
             <React.Fragment>
@@ -67,7 +71,7 @@ export const ViewQuestionPage = props => {
               </div>
             </React.Fragment>
           )}
-          {(answer === undefined || answer==="") && (
+          {(answer === undefined || answer === "") && (
             <React.Fragment>
               <div>
                 <Input
@@ -108,11 +112,14 @@ const mapStateToProps = (state, ownProps) => {
       key => key === ownProps.match.params.id
     );
   }
+  const question = state.questions.find(
+    question => question.id === ownProps.match.params.id
+  );
+  const author = state.users.find(user => user.id === question.author);
   return {
-    question: state.questions.find(
-      question => question.id === ownProps.match.params.id
-    ),
-    answer: answerKey === undefined ? "" : authedUser.answers[answerKey]
+    question,
+    answer: answerKey === undefined ? "" : authedUser.answers[answerKey],
+    author
   };
 };
 

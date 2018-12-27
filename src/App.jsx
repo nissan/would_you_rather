@@ -27,7 +27,7 @@ class App extends Component {
             {isAuthenticated && (
               <React.Fragment>
                 <Route path={routes.root} exact component={HomePage} />
-                <Route path={routes.addQuestion} component={AddQuestionPage} />
+                <Route path={routes.addQuestion} component={AddQuestionPage}  />
                 <Route path={routes.leaderboard} component={LeaderboardPage} />
                 <Route
                   path={`${routes.questions}:id`}
@@ -44,9 +44,9 @@ class App extends Component {
   }
 }
 
-export const mapStateToProps = state => {
+export const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.authedUserId !== "" ? true : false
+    isAuthenticated: state.authedUserId !== "" ? true : false,
   };
 };
 
