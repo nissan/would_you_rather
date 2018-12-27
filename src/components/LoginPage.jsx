@@ -36,10 +36,10 @@ class LoginPage extends React.Component {
               ref="selectedUser"
               id="selectedUser"
             >
-              {Object.keys(users).map(key => (
-                <option key={users[key].id} value={users[key].id}>
-                  {users[key].name}
-                </option>
+              {users.map(user => (
+                <React.Fragment key={user.id}>
+                  <option value={user.id}>{user.name}</option>
+                </React.Fragment>
               ))}
             </Input>
           </CardBody>
