@@ -7,10 +7,17 @@ export const AnsweredQuestions = props => {
   return (
     <React.Fragment>
       {answeredQuestions.map(answeredQuestion => {
-        const {question, author, answer} = answeredQuestion
+        const { question, author, answer } = answeredQuestion;
         return (
           <React.Fragment key={question.id}>
-          <QuestionSummaryCard avatarUrl={author.avatarURL} name={author.name} questionId={question.id} optionsSummaryText={question[answer].text.substring(0,20).concat('...')} />
+            <QuestionSummaryCard
+              avatarUrl={author.avatarURL}
+              name={author.name}
+              questionId={question.id}
+              optionsSummaryText={question[answer].text
+                .substring(0, 20)
+                .concat("...")}
+            />
           </React.Fragment>
         );
       })}
@@ -24,12 +31,14 @@ const mapStateToProps = state => {
     const question = state.questions.find(question => question.id === key);
     return {
       question,
-      author: state.users.find(user => user.id===question.author),
+      author: state.users.find(user => user.id === question.author),
       answer: authedUser.answers[key]
     };
   });
   return {
-    answeredQuestions
+    answeredQuestions: answeredQuestions.sort((a, b) => {
+      return b.question.timestamp - a.question.timestamp;
+    })
   };
 };
 

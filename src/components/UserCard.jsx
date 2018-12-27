@@ -5,8 +5,6 @@ import Avatar from "./Avatar";
 export const UserCard = props => {
   const { user } = props;
   const score = user.questions.length + Object.keys(user.answers).length;
-  console.log(user);
-  console.log(user.questions, user.answers, score);
   return (
     <Container fluid style={{ border: "1px solid black" }}>
       <Row style={{ border: "1px solid black" }}>

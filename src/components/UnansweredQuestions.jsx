@@ -50,7 +50,9 @@ const mapStateToProps = state => {
   });
   return {
     users: state.users,
-    unansweredQuestions
+    unansweredQuestions: unansweredQuestions.sort((a,b)=>{
+      return b.timestamp-a.timestamp
+    })
   };
 };
 
