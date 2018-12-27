@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Redirect
+} from "react-router-dom";
 import HomePage from "./components/HomePage";
 import AddQuestionPage from "./components/AddQuestionPage";
 import LoginPage from "./components/LoginPage";
@@ -24,19 +29,52 @@ class App extends Component {
         <React.Fragment>
           <Topbar />
           <Switch>
-            {isAuthenticated && (
-              <React.Fragment>
-                <Route path={routes.root} exact component={HomePage} />
-                <Route path={routes.addQuestion} component={AddQuestionPage}  />
-                <Route path={routes.leaderboard} component={LeaderboardPage} />
-                <Route
-                  path={`${routes.questions}:id`}
-                  component={ViewQuestionPage}
-                />
-              </React.Fragment>
-            )}
-            <Route path={routes.leaderboard} component={LeaderboardPage} />
-            <Route component={LoginPage} />
+            <Route
+              path={routes.root}
+              exact
+              render={props =>
+                isAuthenticated ? (
+                  <HomePage {...props} />
+                ) : (
+                  <Redirect to={{ pathname: routes.login }} />
+                )
+              }
+            />
+            <Route
+              path={routes.addQuestion}
+              render={props =>
+                isAuthenticated ? (
+                  <AddQuestionPage {...props} />
+                ) : (
+                  <Redirect to={{ pathname: routes.login }} />
+                )
+              }
+            />
+            <Route
+              path={`${routes.questions}:id`}
+              render={props =>
+                isAuthenticated ? (
+                  <ViewQuestionPage {...props} />
+                ) : (
+                  <Redirect to={{ pathname: routes.login }} />
+                )
+              }
+            />
+
+            <Route
+              path={routes.leaderboard}
+              render={props => <LeaderboardPage {...props} />}
+            />
+            <Route
+              path={routes.login}
+              render={props =>
+                isAuthenticated ? (
+                  <Redirect to={{ pathname: routes.root }} />
+                ) : (
+                  <LoginPage {...props} />
+                )
+              }
+            />
           </Switch>
         </React.Fragment>
       </Router>
@@ -44,9 +82,9 @@ class App extends Component {
   }
 }
 
-export const mapStateToProps = (state) => {
+export const mapStateToProps = state => {
   return {
-    isAuthenticated: state.authedUserId !== "" ? true : false,
+    isAuthenticated: state.authedUserId !== "" ? true : false
   };
 };
 

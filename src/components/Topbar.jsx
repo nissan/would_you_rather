@@ -62,7 +62,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
   onLogoutUser: e => {
     e.preventDefault();
-    console.log("Logout clicked");
     dispatch(logoutUser());
   }
 });
