@@ -1,5 +1,6 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
+import { routes } from "../utils";
 import {
   Card,
   CardTitle,
@@ -9,15 +10,91 @@ import {
   Form,
   Input,
   Label,
-  Progress
+  Progress,
+  Container,
+  Row,
+  Col
 } from "reactstrap";
 import { connect } from "react-redux";
+
 import Avatar from "./Avatar";
 
 export const ViewQuestionPage = props => {
   const { question, answer, author } = props;
   return (
     <Form>
+      <Container fluid style={{ border: "2px solid blue" }}>
+        <Row>
+          <Col md={{ size: 1 }} style={{ marginTop: 20, paddingTop: 20 }}>
+            <Avatar big picture={author.avatarURL} name={author.name} />
+          </Col>
+          <Col md={{ size: 8 }} style={{ marginTop: 20, paddingTop: 20 }}>
+            <Card style={{ padding: 4, margin: 4 }}>
+              <CardTitle tag="h3">
+                {author.name} asks: Would you rather
+              </CardTitle>
+
+              <CardBody>
+                <React.Fragment>
+                  <div>
+                    {answer === "optionOne" ? (
+                      <Input
+                        type="radio"
+                        id="answer1"
+                        name="answer"
+                        value="optionOne"
+                        defaultChecked
+                      />
+                    ) : (
+                      <Input
+                        type="radio"
+                        id="answer1"
+                        name="answer"
+                        value="optionOne"
+                      />
+                    )}
+                    <Label for="answer1">{question.optionOne.text} </Label>
+                  </div>
+                  <div>OR</div>
+                  <div>
+                    {answer === "optionTwo" ? (
+                      <Input
+                        type="radio"
+                        id="answer2"
+                        name="answer"
+                        value="optionTwo"
+                        defaultChecked
+                      />
+                    ) : (
+                      <Input
+                        type="radio"
+                        id="answer2"
+                        name="answer"
+                        value="optionTwo"
+                      />
+                    )}
+
+                    <Label for="answer2">{question.optionTwo.text}</Label>
+                  </div>
+                </React.Fragment>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="text-center">
+            {" "}
+            <Button color="info" style={{ margin: 10, padding: 10 }}>
+              <Link
+                to={`${routes.questions}${question.id}`}
+                style={{ color: "white" }}
+              >
+                View Poll
+              </Link>
+            </Button>
+          </Col>
+        </Row>
+      </Container>
       <Card>
         <CardTitle>
           <Avatar picture={author.avatarURL} name={author.name} />
@@ -72,29 +149,6 @@ export const ViewQuestionPage = props => {
               </div>
             </React.Fragment>
           )}
-          {(answer === undefined || answer === "") && (
-            <React.Fragment>
-              <div>
-                <Input
-                  type="radio"
-                  id="answer1"
-                  name="answer"
-                  value="optionOne"
-                />
-                <Label for="answer1">{question.optionOne.text} </Label>
-              </div>
-              <div>OR</div>
-              <div>
-                <Input
-                  type="radio"
-                  id="answer2"
-                  name="answer"
-                  value="optionTwo"
-                />
-                <Label for="answer2">{question.optionTwo.text}</Label>
-              </div>
-            </React.Fragment>
-          )}
           <Input type="hidden" id="questionId" value={question.id} />
         </CardBody>
         <CardFooter>
@@ -111,10 +165,12 @@ export const ViewQuestionPage = props => {
                 }
               >
                 <span style={{ color: "black", padding: 4, margin: 4 }}>
-                  {question.optionOne.text}: {(question.optionOne.votes.length /
+                  {question.optionOne.text}:{" "}
+                  {(question.optionOne.votes.length /
                     (question.optionOne.votes.length +
                       question.optionTwo.votes.length)) *
-                  100}%
+                    100}
+                  %
                 </span>
               </Progress>
               <br />
@@ -129,10 +185,12 @@ export const ViewQuestionPage = props => {
                 }
               >
                 <span style={{ color: "black", padding: 4, margin: 4 }}>
-                  {question.optionTwo.text}: {(question.optionTwo.votes.length /
+                  {question.optionTwo.text}:{" "}
+                  {(question.optionTwo.votes.length /
                     (question.optionOne.votes.length +
                       question.optionTwo.votes.length)) *
-                  100}%
+                    100}
+                  %
                 </span>
               </Progress>
             </React.Fragment>

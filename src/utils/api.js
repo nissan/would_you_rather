@@ -15,7 +15,15 @@ export const getQuestions = async () => {
 };
 
 export const saveQuestion = async question => {
-  DATA._saveQuestion(question);
+  try {
+
+    const savedQuestion = DATA._saveQuestion(question);
+    return savedQuestion;
+  }
+  catch(error) {
+    console.log("Error occurred, question not saved")
+    return error;
+  }
 };
 
 export const saveQuestionAnswer = async (authedUser, qid, answer) => {
