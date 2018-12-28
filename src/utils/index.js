@@ -1,8 +1,9 @@
 export const routes = {
   root: "/",
   login: "/login/",
-  questions:"/questions/",
+  questions: "/questions/",
   addQuestion: "/add/",
   leaderboard: "/leaderboard/",
-  logout: "/logout/"
+  logout: "/logout/",
+  error: "/error/"
 };

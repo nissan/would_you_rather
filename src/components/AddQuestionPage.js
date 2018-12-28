@@ -9,7 +9,7 @@ import {
   CardFooter
 } from "reactstrap";
 import { connect } from "react-redux";
-import { handleSaveQuestion } from "../actions/questions";
+import { handleSaveQuestion } from "../actions/shared";
 import { withRouter } from "react-router-dom";
 import { routes } from "../utils";
 

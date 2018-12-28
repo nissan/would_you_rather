@@ -1,4 +1,4 @@
-import { getQuestions, saveQuestion } from "../utils/api";
+import { getQuestions } from "../utils/api";
 export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
 export const ADD_QUESTION = "ADD_QUESTION";
 
@@ -8,7 +8,6 @@ export const addQuestion = question => {
     question
   };
 };
-
 
 export const loadQuestions = questions => {
   return {
@@ -23,13 +22,3 @@ export const handleLoadQuestions = () => {
     dispatch(loadQuestions(questions));
   };
 };
-
-export const handleSaveQuestion = (question) => {
-  return async dispatch => {
-    const savedQuestion = await saveQuestion(question);
-    console.log(savedQuestion);
-    dispatch(addQuestion(savedQuestion));
-  }
-}
-
-

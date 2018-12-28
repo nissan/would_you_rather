@@ -14,7 +14,6 @@ import {
 import Avatar from "./Avatar";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { routes } from "../utils";
 import { handleSaveQuestionAnswer } from "../actions/shared";
 
 export class ViewUnansweredQuestion extends React.Component {
@@ -23,9 +22,8 @@ export class ViewUnansweredQuestion extends React.Component {
     this.submitForm = this.submitForm.bind(this);
   }
   submitForm(e) {
-    const { onSubmitForm, history } = this.props;
+    const { onSubmitForm } = this.props;
     onSubmitForm(e);
-    history.push(routes.root);
   }
   render() {
     const { question, author, authedUserId } = this.props;
