@@ -8,6 +8,7 @@ import {
   CardTitle,
   CardSubtitle,
   CardBody,
+  CardFooter,
   Progress
 } from "reactstrap";
 import Avatar from "./Avatar";
@@ -15,6 +16,9 @@ import { connect } from "react-redux";
 
 export const ViewAnsweredQuestion = props => {
   const { question, author, answer } = props;
+  const optionOneVotes = question.optionOne.votes.length;
+  const optionTwoVotes = question.optionTwo.votes.length;
+  const totalVotes = optionOneVotes + optionTwoVotes;
   return (
     <Form>
       <Container fluid style={{ border: "2px solid blue" }}>
@@ -35,24 +39,17 @@ export const ViewAnsweredQuestion = props => {
                     <Progress
                       striped
                       color="success"
-                      value={
-                        (question.optionOne.votes.length /
-                          (question.optionOne.votes.length +
-                            question.optionTwo.votes.length)) *
-                        100
-                      }
+                      value={(optionOneVotes / totalVotes) * 100}
                     >
                       <span style={{ color: "black", padding: 4, margin: 4 }}>
-                        {((question.optionOne.votes.length /
-                          (question.optionOne.votes.length +
-                            question.optionTwo.votes.length)) *
-                          100).toFixed(2)}
-                        %
+                        {((optionOneVotes / totalVotes) * 100).toFixed(2)}%
                         {answer === "optionOne" ? (
                           <strong>Your answer</strong>
                         ) : (
                           ""
-                        )}
+                        )}{" "}
+                        ({optionOneVotes}{" "}
+                        {optionOneVotes === 1 ? "vote" : "votes"})
                       </span>
                     </Progress>
                   </div>
@@ -62,29 +59,25 @@ export const ViewAnsweredQuestion = props => {
                     <Progress
                       striped
                       color="success"
-                      value={
-                        (question.optionTwo.votes.length /
-                          (question.optionOne.votes.length +
-                            question.optionTwo.votes.length)) *
-                        100
-                      }
+                      value={(optionTwoVotes / totalVotes) * 100}
                     >
                       <span style={{ color: "black", padding: 4, margin: 4 }}>
-                        {((question.optionTwo.votes.length /
-                          (question.optionOne.votes.length +
-                            question.optionTwo.votes.length)) *
-                          100).toFixed(2)}
-                        %
+                        {((optionTwoVotes / totalVotes) * 100).toFixed(2)}%
                         {answer === "optionTwo" ? (
                           <strong>Your answer</strong>
                         ) : (
                           ""
                         )}
+                        ({optionTwoVotes}{" "}
+                        {optionTwoVotes === 1 ? "vote" : "votes"})
                       </span>
                     </Progress>
                   </div>
                 </React.Fragment>
               </CardBody>
+              <CardFooter>
+                {totalVotes} {totalVotes === 1 ? "user" : "users"} answered this poll
+              </CardFooter>
             </Card>
           </Col>
         </Row>

@@ -11,6 +11,7 @@ import AddQuestionPage from "./components/AddQuestionPage";
 import LoginPage from "./components/LoginPage";
 import LeaderboardPage from "./components/LeaderboardPage";
 import ViewQuestionPage from "./components/ViewQuestionPage";
+import ErrorPage from "./components/ErrorPage";
 import Topbar from "./components/Topbar";
 import { routes } from "./utils/";
 import { handleLoadUsers } from "./actions/users";
@@ -75,6 +76,7 @@ class App extends Component {
                 )
               }
             />
+            <Route component={ErrorPage} />
           </Switch>
         </React.Fragment>
       </Router>

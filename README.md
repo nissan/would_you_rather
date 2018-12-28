@@ -6,6 +6,36 @@ The `_DATA.js` file represents a fake database and methods that let you access t
 
 Using the provided code, this React/Redux front end for the application was created using the [Create React App](https://github.com/facebook/create-react-app) to bootstrap the project.
 
+## Installing and Launching the project
+1. Change to the directory of the project
+2. Run `npm install` or `yarn` to install all dependencies
+3. Run `npm start` or `yarn start` to start the web application
+
+## Components
+| Name    | Description           |
+|-----------------|------------------|-------------------         |
+| AddQuestionPage   | Page to add poll question |
+| AnsweredQuestions | Component that displays list of answered questions
+| Avatar | Displays a user's photo in a circular box
+| HomePage | Page to render the list of answered and unanswered questions for the logged in user
+| LeaderboardPage | Page to display the leaderboard of users
+| LoginPage | Page to allow selection of user to log in as 
+| QuestionSummaryCard | Component that displays a summary of a poll question
+| Topbar | Component for the top navigation bar displayed on all pages
+| UnansweredQuestions | Component that displays the list of unanswered questions for the logged in user
+| UserCard | Component that displays the user information including number of answered and created polls, as well as the calculated score
+| ViewAnsweredQuestion | Component that displays an answered question and the voting summary for it
+| ViewQuestionPage | Page that acts as container for displaying a question, choosing to render either the ViewAnsweredQuestion or ViewUnansweredQuestion component depending on if the logged in user has answered the question yet
+| ViewUnansweredQuestion | Component that displays an unanswered question and allows the logged user to submit a vote on an option
+
+## Utils
+* routes - this contains the list of routes used by React-Router in navigating thru the application
+
+## State objects
+State objects follow the layout of the database namely 
+* Users - holding the list of users from the user objects in the database
+* Questions - holding the list of questions from the questions objects in the database
+* AuthedUser - holding the ID of the current logged in User
 ## Data
 
 There are two types of objects stored in our database:
