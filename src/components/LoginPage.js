@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import {
   Button,
   Card,
@@ -11,7 +12,11 @@ import {
   Input
 } from "reactstrap";
 import { loginUser } from "../actions/authedUser";
+import { routes } from "../utils";
 class LoginPage extends React.Component {
+  state = {
+    redirectToReferrer: false
+  };
   constructor(props) {
     super(props);
     this.submit = this.submit.bind(this);
@@ -20,9 +25,15 @@ class LoginPage extends React.Component {
     const { onSubmitForm } = this.props;
     e.preventDefault();
     onSubmitForm(e.target.selectedUser.value);
+    this.setState({ redirectToReferrer: true });
   }
   render() {
-    const { users } = this.props;
+    const { users, location } = this.props;
+    const { from } = location.state || { from: { pathname: routes.root } };
+    const { redirectToReferrer } = this.state;
+    if (redirectToReferrer) {
+      return <Redirect to={from} />;
+    }
     return (
       <Form onSubmit={this.submit}>
         <Card>

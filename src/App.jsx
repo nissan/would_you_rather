@@ -1,11 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {
-  BrowserRouter as Router,
-  Redirect,
-  Route,
-  Switch
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { handleLoadQuestions } from "./actions/questions";
 import { handleLoadUsers } from "./actions/users";
 import AddQuestionPage from "./components/AddQuestionPage";
@@ -13,6 +8,7 @@ import ErrorPage from "./components/ErrorPage";
 import HomePage from "./components/HomePage";
 import LeaderboardPage from "./components/LeaderboardPage";
 import LoginPage from "./components/LoginPage";
+import PrivateRoute from "./components/PrivateRoute";
 import Topbar from "./components/Topbar";
 import ViewQuestionPage from "./components/ViewQuestionPage";
 import { routes } from "./utils/";
@@ -24,64 +20,26 @@ class App extends Component {
     onLoadQuestions();
   }
   render() {
-    const { isAuthenticated } = this.props;
     return (
       <Router>
         <React.Fragment>
           <Topbar />
           <Switch>
-            <Route
-              path={routes.root}
-              exact
-              render={props =>
-                isAuthenticated ? (
-                  <HomePage {...props} />
-                ) : (
-                  <Redirect to={{ pathname: routes.login }} />
-                )
-              }
-            />
-            <Route
+            <PrivateRoute path={routes.root} exact component={HomePage} />
+            <PrivateRoute
               path={routes.addQuestion}
-              render={props =>
-                isAuthenticated ? (
-                  <AddQuestionPage {...props} />
-                ) : (
-                  <Redirect to={{ pathname: routes.login }} />
-                )
-              }
+              component={AddQuestionPage}
             />
-            <Route
+            <PrivateRoute
               path={`${routes.questions}:id`}
-              render={props =>
-                isAuthenticated ? (
-                  <ViewQuestionPage {...props} />
-                ) : (
-                  <Redirect to={{ pathname: routes.login }} />
-                )
-              }
+              component={ViewQuestionPage}
             />
 
-            <Route
+            <PrivateRoute
               path={routes.leaderboard}
-              render={props =>
-                isAuthenticated ? (
-                  <LeaderboardPage {...props} />
-                ) : (
-                  <Redirect to={{ pathname: routes.login }} />
-                )
-              }
+              component={LeaderboardPage}
             />
-            <Route
-              path={routes.login}
-              render={props =>
-                isAuthenticated ? (
-                  <Redirect to={{ pathname: routes.root }} />
-                ) : (
-                  <LoginPage {...props} />
-                )
-              }
-            />
+            <Route path={routes.login} component={LoginPage} />
             <Route component={ErrorPage} />
           </Switch>
         </React.Fragment>
