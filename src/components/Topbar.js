@@ -19,11 +19,11 @@ const Topbar = props => {
             <TopbarButton to={routes.addQuestion}>New Question</TopbarButton>
           </Col>
         )}
-        <Col>
-          <TopbarButton to={routes.leaderboard}>Leaderboard</TopbarButton>
-        </Col>
         {isAuthenticated && (
           <React.Fragment>
+            <Col>
+              <TopbarButton to={routes.leaderboard}>Leaderboard</TopbarButton>
+            </Col>
             <Col>
               {" "}
               <Avatar picture={user.avatarURL} name={user.name} />

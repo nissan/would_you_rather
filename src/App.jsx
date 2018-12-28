@@ -2,20 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   BrowserRouter as Router,
+  Redirect,
   Route,
-  Switch,
-  Redirect
+  Switch
 } from "react-router-dom";
-import HomePage from "./components/HomePage";
-import AddQuestionPage from "./components/AddQuestionPage";
-import LoginPage from "./components/LoginPage";
-import LeaderboardPage from "./components/LeaderboardPage";
-import ViewQuestionPage from "./components/ViewQuestionPage";
-import ErrorPage from "./components/ErrorPage";
-import Topbar from "./components/Topbar";
-import { routes } from "./utils/";
-import { handleLoadUsers } from "./actions/users";
 import { handleLoadQuestions } from "./actions/questions";
+import { handleLoadUsers } from "./actions/users";
+import AddQuestionPage from "./components/AddQuestionPage";
+import ErrorPage from "./components/ErrorPage";
+import HomePage from "./components/HomePage";
+import LeaderboardPage from "./components/LeaderboardPage";
+import LoginPage from "./components/LoginPage";
+import Topbar from "./components/Topbar";
+import ViewQuestionPage from "./components/ViewQuestionPage";
+import { routes } from "./utils/";
 
 class App extends Component {
   componentDidMount() {
@@ -64,7 +64,13 @@ class App extends Component {
 
             <Route
               path={routes.leaderboard}
-              render={props => <LeaderboardPage {...props} />}
+              render={props =>
+                isAuthenticated ? (
+                  <LeaderboardPage {...props} />
+                ) : (
+                  <Redirect to={{ pathname: routes.login }} />
+                )
+              }
             />
             <Route
               path={routes.login}
